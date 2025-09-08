@@ -33,7 +33,7 @@ The dashboard will open at `http://localhost:5173` with simulation mode active b
 
 - **Framework**: React 18+ with TypeScript
 - **Layout**: Dockview for dockable panels
-- **Styling**: Tailwind CSS with high-contrast theme
+- **Styling**: Custom CSS with high-contrast theme
 - **3D Graphics**: Three.js with React Three Fiber
 - **Charts**: Recharts for telemetry visualization  
 - **Maps**: React Leaflet with OpenStreetMap
@@ -101,7 +101,7 @@ The built-in simulation generates realistic flight data:
 ### Customization
 
 - **Layout**: Modify panel configuration in `App.tsx`
-- **Styling**: Update color scheme in `src/index.css` and Tailwind config
+- **Styling**: Update color scheme in `src/index.css`
 - **Data Processing**: Add filters and calculations in telemetry store
 - **Visualization**: Extend chart types and 3D models in component files
 

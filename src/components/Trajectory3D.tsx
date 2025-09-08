@@ -137,7 +137,7 @@ const SegmentedTrajectory: React.FC<SegmentedTrajectoryProps> = ({ targetExtent,
               >
                 <sphereGeometry args={[1.2, 8, 8]} />
                 <meshBasicMaterial
-                  color={gIndex === selectedIndex ? '#9333ea' : hoveredPoint === gIndex && !locked ? '#a855f7' : 'transparent'}
+                  color={gIndex === selectedIndex ? '#9333ea' : hoveredPoint === gIndex && !locked ? '#a855f7' : '#000000'}
                   transparent
                   opacity={gIndex === selectedIndex ? 0.85 : hoveredPoint === gIndex && !locked ? 0.5 : 0}
                   depthWrite={false}
@@ -340,7 +340,7 @@ export const Trajectory3D: React.FC = () => {
         </Canvas>
 
         {/* Bottom-right stats overlay */}
-        <div className="absolute bottom-2 right-2 z-10 w-64 bg-white/95 backdrop-blur border border-gray-300 rounded-md shadow px-3 py-2 text-[11px] font-mono text-gray-700 space-y-1">
+  <div className="absolute bottom-2 right-2 z-10 w-64 bg-white-95 backdrop-blur border border-gray-300 rounded-md shadow px-3 py-2 text-11px font-mono text-gray-700 space-y-1">
           <div className="flex items-center justify-between">
             <span className="font-semibold tracking-wide text-gray-800 text-xs">POINT STATS</span>
             <button
@@ -379,7 +379,7 @@ export const Trajectory3D: React.FC = () => {
         </div>
 
         {/* Bottom-left legend */}
-        <div className="absolute bottom-2 left-2 z-10 bg-white/90 border border-gray-300 rounded px-2 py-1 text-[10px] text-gray-600 flex flex-wrap gap-x-3 gap-y-1 items-center max-w-sm select-none">
+  <div className="absolute bottom-2 left-2 z-10 bg-white-90 border border-gray-300 rounded px-1 py-0.5 text-8px text-gray-600 flex flex-wrap gap-x-2 gap-y-0.5 items-center max-w-xs select-none">
           <button type="button" onClick={()=> { if (history.length) { setSelectedIndex(0); if (!locked) setScrollIndex(0);} }} className="flex items-center space-x-1 hover:underline">
             <span className="w-3 h-3 rounded-full bg-green-500 inline-block" /> <span>Launch</span>
           </button>

@@ -2,8 +2,8 @@ import { StrictMode } from 'react';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
-import './index.css';
 import 'dockview/dist/styles/dockview.css';
+import './index.css';
 
 class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { error: any }> {
   constructor(props: any) {

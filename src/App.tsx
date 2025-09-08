@@ -30,7 +30,6 @@ function App() {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
     const squareSize = Math.min(Math.floor(screenWidth * 0.25), Math.floor(screenHeight * 0.35));
-    const landscapeWidth = Math.floor(squareSize * 1.8);
     const landscapeHeight = Math.floor(squareSize * 0.8);
 
     // Create a structured layout to prevent overlaps
@@ -39,73 +38,69 @@ function App() {
 
     // Add panels in a controlled order with proper positioning
 
-        // Trajectory 3D - top left
+        // Trajectory 3D - left main column
     const trajectoryPanel = event.api.addPanel({
       id: 'trajectory-3d',
       component: 'trajectory-3d',
       title: 'Trajectory 3D',
-      minimumWidth: Math.floor(squareSize * 0.8),
-      minimumHeight: Math.floor(squareSize * 0.8),
-      maximumWidth: Math.floor(screenWidth * 0.5),
+      minimumWidth: Math.floor(squareSize * 1.2),
+      minimumHeight: Math.floor(squareSize * 1.0),
+      maximumWidth: Math.floor(screenWidth * 0.55),
       maximumHeight: Math.floor(screenHeight * 0.6)
     });
 
-    // Orientation 3D - next to Trajectory
-    const orientationPanel = event.api.addPanel({
-      id: 'orientation-3d',
-      component: 'orientation-3d',
-      title: 'Orientation 3D',
-      position: { referencePanel: trajectoryPanel, direction: 'right' },
-      minimumWidth: Math.floor(squareSize * 0.8),
-      minimumHeight: Math.floor(squareSize * 0.8),
-      maximumWidth: Math.floor(screenWidth * 0.5),
-      maximumHeight: Math.floor(screenHeight * 0.6)
-    });
-
-    // Live Map - next to Orientation
+    // Right middle column: Live Map (top), Orientation (below)
     const liveMapPanel = event.api.addPanel({
       id: 'live-map',
       component: 'live-map',
       title: 'Live Map',
-      position: { referencePanel: orientationPanel, direction: 'right' },
-      minimumWidth: Math.floor(squareSize * 0.6),
-      minimumHeight: Math.floor(squareSize * 0.6),
-      maximumWidth: Math.floor(screenWidth * 0.4),
-      maximumHeight: Math.floor(screenHeight * 0.5)
+      position: { referencePanel: trajectoryPanel, direction: 'right' },
+      minimumWidth: squareSize,
+      minimumHeight: squareSize,
+      initialWidth: squareSize + 80,
+      initialHeight: squareSize + 40
     });
 
-    // Control Panel - next to Live Map
+    // Orientation panel directly below live map so they share vertical space as squares
+    event.api.addPanel({
+      id: 'orientation-3d',
+      component: 'orientation-3d',
+      title: 'Orientation 3D',
+      position: { referencePanel: liveMapPanel, direction: 'below' },
+      minimumWidth: squareSize,
+      minimumHeight: squareSize,
+      initialHeight: squareSize + 40
+    });
+
+    // Sidebar control panel: dedicated right column
     event.api.addPanel({
       id: 'control-panel',
       component: 'control-panel',
       title: 'Control',
       position: { referencePanel: liveMapPanel, direction: 'right' },
-      minimumWidth: Math.floor(squareSize * 0.8),
-      maximumWidth: Math.floor(screenWidth * 0.3)
+      minimumWidth: Math.floor(squareSize * 0.9),
+      initialWidth: Math.min(Math.floor(squareSize * 1.4), 400),
+      maximumWidth: Math.floor(screenWidth * 0.35)
     });
 
-    // IMU Chart - below Trajectory
+    // Lower left stack: IMU and Status under trajectory
     const imuPanel = event.api.addPanel({
       id: 'imu-chart',
       component: 'imu-chart',
       title: 'IMU Chart',
       position: { referencePanel: trajectoryPanel, direction: 'below' },
-      minimumWidth: landscapeWidth,
+      minimumWidth: Math.floor(squareSize * 1.4),
       minimumHeight: landscapeHeight,
-      maximumWidth: Math.floor(screenWidth * 0.8),
-      maximumHeight: Math.floor(screenHeight * 0.4)
+      maximumWidth: Math.floor(screenWidth * 0.7)
     });
 
-    // Status Panel - next to IMU Chart
     event.api.addPanel({
       id: 'status-panel',
       component: 'status-panel',
       title: 'Status',
       position: { referencePanel: imuPanel, direction: 'right' },
       minimumWidth: Math.floor(squareSize * 0.8),
-      minimumHeight: landscapeHeight,
-      maximumWidth: Math.floor(screenWidth * 0.4),
-      maximumHeight: Math.floor(screenHeight * 0.4)
+      minimumHeight: landscapeHeight
     });
 
     // Add CSS to prevent overlaps and improve layout

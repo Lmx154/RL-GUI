@@ -64,9 +64,9 @@ export const LiveMap: React.FC = () => {
 
   return (
     <Panel>
-      <div className="absolute top-2 left-2 z-[1000] bg-white/90 backdrop-blur rounded-md shadow px-2 py-1">
+  <div className="absolute top-2 left-2 z-1000 bg-white-90 backdrop-blur rounded-md shadow px-2 py-1">
         {currentPacket && (
-          <div className="text-[10px] leading-tight text-gray-700 font-mono">
+          <div className="text-10px leading-tight text-gray-700 font-mono">
             <div>Lat {currentPacket.gps.lat.toFixed(5)}</div>
             <div>Lon {currentPacket.gps.lon.toFixed(5)}</div>
             <div>Alt {currentPacket.gps.alt.toFixed(0)}m</div>

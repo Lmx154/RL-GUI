@@ -72,7 +72,7 @@ export const ControlPanel: React.FC = () => {
   };
 
   return (
-    <div className="h-full bg-white border-l border-gray-200 flex flex-col">
+  <div className="h-full bg-white border-l border-gray-200 flex flex-col" style={{minWidth:300}}>
       {/* Header */}
       <div className="p-4 border-b border-gray-200">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Control Panel</h2>
@@ -84,38 +84,16 @@ export const ControlPanel: React.FC = () => {
           </label>
           <Listbox value={selectedDevice} onChange={handleDeviceSelect}>
             <div className="relative">
-              <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-md pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                <span className="block truncate">
+              <Listbox.Button className="cp-select-trigger">
+                <span style={{flex:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap'}}>
                   {selectedDevice || 'Select Device'}
                 </span>
-                <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                  <ChevronDownIcon className="h-5 w-5 text-gray-400" />
-                </span>
+                <ChevronDownIcon className="cp-select-chevron" />
               </Listbox.Button>
-              
-              <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                <Listbox.Option
-                  value="Simulation Mode"
-                  className={({ active }) =>
-                    `cursor-default select-none relative py-2 pl-10 pr-4 ${
-                      active ? 'text-white bg-blue-600' : 'text-gray-900'
-                    }`
-                  }
-                >
-                  Simulation Mode
-                </Listbox.Option>
-                {MOCK_DEVICES.map((device) => (
-                  <Listbox.Option
-                    key={device}
-                    value={device}
-                    className={({ active }) =>
-                      `cursor-default select-none relative py-2 pl-10 pr-4 ${
-                        active ? 'text-white bg-blue-600' : 'text-gray-900'
-                      }`
-                    }
-                  >
-                    {device}
-                  </Listbox.Option>
+              <Listbox.Options className="cp-options">
+                <Listbox.Option value="Simulation Mode" className={({active})=>`cp-option ${active?'active':''}`}>Simulation Mode</Listbox.Option>
+                {MOCK_DEVICES.map(device => (
+                  <Listbox.Option key={device} value={device} className={({active})=>`cp-option ${active?'active':''}`}>{device}</Listbox.Option>
                 ))}
               </Listbox.Options>
             </div>
@@ -123,34 +101,15 @@ export const ControlPanel: React.FC = () => {
         </div>
 
         {/* Connection Button */}
-        <button
-          onClick={handleConnect}
-          disabled={!selectedDevice}
-          className={`w-full flex items-center justify-center px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-            isConnected
-              ? 'bg-red-600 hover:bg-red-700 text-white'
-              : 'bg-blue-600 hover:bg-blue-700 text-white disabled:bg-gray-300 disabled:text-gray-500'
-          }`}
-        >
-          {isConnected ? (
-            <>
-              <StopIcon className="w-4 h-4 mr-2" />
-              Disconnect
-            </>
-          ) : (
-            <>
-              <PlayIcon className="w-4 h-4 mr-2" />
-              Connect
-            </>
-          )}
+        <button onClick={handleConnect} disabled={!selectedDevice} className={`cp-connect ${isConnected?'disconnect':''}`}> 
+          {isConnected ? <StopIcon /> : <PlayIcon />}
+          {isConnected ? 'Disconnect' : 'Connect'}
         </button>
 
         {/* Connection Status */}
-        <div className="mt-3 flex items-center space-x-2">
-          <WifiIcon className={`w-5 h-5 ${isConnected ? 'text-green-500' : 'text-gray-400'}`} />
-          <span className={`text-sm ${isConnected ? 'text-green-600' : 'text-gray-500'}`}>
-            {isConnected ? (isSimulating ? 'Simulation Active' : 'Connected') : 'Disconnected'}
-          </span>
+        <div className={`cp-status ${isConnected?'connected':''}`}>
+          <div className="dot" />
+          <span>{isConnected ? (isSimulating ? 'Simulation Active' : 'Connected') : 'Disconnected'}</span>
         </div>
       </div>
 
