@@ -1,0 +1,252 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dockview theming */
+.dockview-theme-light {
+  --dockview-background: #F8FAFC;
+  --dockview-tab-background: #FFFFFF;
+  --dockview-tab-background-active: #3B82F6;
+  --dockview-tab-text: #1E293B;
+  --dockview-tab-text-active: #FFFFFF;
+  --dockview-border: #E2E8F0;
+  --dockview-separator: #CBD5E1;
+}
+
+/* Prevent panel overlaps and improve layout */
+.dockview-theme-light .dv-pane-container {
+  position: relative !important;
+  z-index: 1 !important;
+  overflow: hidden !important;
+}
+
+.dockview-theme-light .dv-floating-group {
+  display: none !important;
+}
+
+.dockview-theme-light .dv-tabs-and-actions-container {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.dockview-theme-light .dv-groupview {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.dockview-theme-light .dv-gridview {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Ensure panels don't go outside their containers */
+.dockview-theme-light .dv-view-container {
+  position: relative !important;
+  overflow: hidden !important;
+  contain: layout style paint;
+}
+
+/* Improve panel resizing behavior */
+.dockview-theme-light .dv-resize-handle {
+  z-index: 10 !important;
+  position: relative !important;
+}
+
+/* Ensure Panel component fills its container properly */
+.panel {
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Fix for Canvas components in panels */
+.panel canvas {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Custom glow animations for phase indicators */
+@keyframes glow-orange {
+  0%, 100% { text-shadow: 0 0 5px #F97316, 0 0 10px #F97316, 0 0 15px #F97316; }
+  50% { text-shadow: 0 0 10px #F97316, 0 0 20px #F97316, 0 0 30px #F97316; }
+}
+
+@keyframes glow-blue {
+  0%, 100% { text-shadow: 0 0 5px #3B82F6, 0 0 10px #3B82F6, 0 0 15px #3B82F6; }
+  50% { text-shadow: 0 0 10px #3B82F6, 0 0 20px #3B82F6, 0 0 30px #3B82F6; }
+}
+
+@keyframes glow-purple {
+  0%, 100% { text-shadow: 0 0 5px #8B5CF6, 0 0 10px #8B5CF6, 0 0 15px #8B5CF6; }
+  50% { text-shadow: 0 0 10px #8B5CF6, 0 0 20px #8B5CF6, 0 0 30px #8B5CF6; }
+}
+
+@keyframes glow-green {
+  0%, 100% { text-shadow: 0 0 5px #10B981, 0 0 10px #10B981, 0 0 15px #10B981; }
+  50% { text-shadow: 0 0 10px #10B981, 0 0 20px #10B981, 0 0 30px #10B981; }
+}
+
+.animate-glow-orange {
+  animation: glow-orange 2s ease-in-out infinite;
+}
+
+.animate-glow-blue {
+  animation: glow-blue 2s ease-in-out infinite;
+}
+
+.animate-glow-purple {
+  animation: glow-purple 2s ease-in-out infinite;
+}
+
+.animate-glow-green {
+  animation: glow-green 2s ease-in-out infinite;
+}
+
+/* High contrast focus states for accessibility */
+*:focus {
+  outline: 2px solid #3B82F6;
+  outline-offset: 2px;
+}
+
+/* Ensure readable text on all backgrounds */
+.text-contrast {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive touch targets */
+@media (max-width: 768px) {
+  button, .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Custom scrollbar for console */
+.console-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.console-scrollbar::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.console-scrollbar::-webkit-scrollbar-thumb {
+  background: #10B981;
+  border-radius: 4px;
+}
+
+.console-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #059669;
+}
+
+/* Leaflet map container styling */
+.leaflet-container {
+  font-family: inherit;
+}
+
+/* Custom dockview panel styling */
+.dockview-panel-content {
+  padding: 0;
+}
+
+.dockview-tablist-container {
+  background-color: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.dockview-tab {
+  border-radius: 6px 6px 0 0;
+  margin-right: 2px;
+  transition: all 0.2s ease;
+}
+
+.dockview-tab:hover {
+  background-color: #F1F5F9;
+}
+
+.dockview-tab.active {
+  background-color: #3B82F6;
+  color: white;
+}
+
+/* Chart container improvements */
+.recharts-wrapper {
+  font-family: inherit;
+}
+
+.recharts-cartesian-axis-tick-value {
+  font-size: 12px;
+  fill: #6B7280;
+}
+
+.recharts-legend-item-text {
+  color: #374151 !important;
+}
+
+/* 3D Canvas improvements */
+canvas {
+  border-radius: 0.5rem;
+}
+
+/* Loading and error states */
+.loading-spinner {
+  border: 2px solid #E5E7EB;
+  border-top: 2px solid #3B82F6;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error boundary styling */
+.error-boundary {
+  background: #FEE2E2;
+  border: 1px solid #FECACA;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  color: #991B1B;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .bg-white {
+    background-color: white !important;
+  }
+  
+  .text-gray-900 {
+    color: black !important;
+  }
+  
+  .border-gray-200 {
+    border-color: black !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-break-before {
+    page-break-before: always;
+  }
+}
